@@ -17,7 +17,7 @@ def wrapped_toggle_lifx(action_id):
 		current_power = device.get_power()
 		device.set_power(0 if current_power == MAX_POWER else MAX_POWER, rapid=True)
 	except:
-    	traceback.print_exc()
+		traceback.print_exc()
 
 def wrapped_down_lifx(action_id):
 	try:
@@ -26,7 +26,7 @@ def wrapped_down_lifx(action_id):
 		logger.debug(current_brightness)
 		device.set_brightness(current_brightness - 12000 if current_brightness >= 12000 else 0, rapid=True)
 	except:
-    	traceback.print_exc()
+		traceback.print_exc()
 
 def wrapped_up_lifx(action_id):
 	try:
@@ -35,7 +35,7 @@ def wrapped_up_lifx(action_id):
 		logger.debug(current_brightness)
 		device.set_brightness(current_brightness + 12000 if current_brightness < (MAX_POWER - 12000) else MAX_POWER, rapid=True)
 	except:
-    	traceback.print_exc()
+		traceback.print_exc()
 
 actions = {
 	"toggle-lifx" : wrapped_toggle_lifx,
