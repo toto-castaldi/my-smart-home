@@ -2,23 +2,30 @@ import fliclib
 import lifx
 import utils
 import config
+import lifxlan
 
 logger = utils.init_log()
 c = config.get_config()
-
+ligths_lan = lifxlan.LifxLAN(None)
 client = fliclib.FlicClient("localhost")
+MAX_POWER = 65535
 
 def wrapped_toggle_lifx(action_id):
-	logger.debug(action_id)
-	lifx.toggle(action_id, c["lifx_api_key"])
+	device = ligths_lan.get_device_by_name(action_id)
+	current_power = device.get_power()
+	device.set_power(0 if current_power == MAX_POWER else MAX_POWER, rapid=True)
 
 def wrapped_down_lifx(action_id):
-	logger.debug(action_id)
-	lifx.state_delta(action_id, c["lifx_api_key"], brightness=-0.3)
+	device = ligths_lan.get_device_by_name(action_id)
+	current_brightness = device.get_color()[2]
+	logger.debug(current_brightness)
+	device.set_brightness(current_brightness - 12000 if current_brightness >= 12000 else 0, rapid=True)
 
 def wrapped_up_lifx(action_id):
-	logger.debug(action_id)
-	lifx.state_delta(action_id, c["lifx_api_key"], brightness=0.3)
+	device = ligths_lan.get_device_by_name(action_id)
+	current_brightness = device.get_color()[2]
+	logger.debug(current_brightness)
+	device.set_brightness(current_brightness + 12000 if current_brightness < (MAX_POWER - 12000) else MAX_POWER, rapid=True)
 
 actions = {
 	"toggle-lifx" : wrapped_toggle_lifx,
@@ -54,9 +61,14 @@ def got_info(items):
 	for bd_addr in items["bd_addr_of_verified_buttons"]:
 		got_button(bd_addr)
 
-logger.debug(c)
 
-lifx.list_lights(c["lifx_api_key"])
+
+
+devices = ligths_lan.get_lights()
+labels = []
+for device in devices:
+	logger.debug(device)
+
 
 client.get_info(got_info)
 

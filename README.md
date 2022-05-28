@@ -37,3 +37,7 @@ python scan_wizard.py
 pip install -r requirements.txt
 LOG_LEVEL=DEBUG CONFIG=[YOUR_CONFIG_PATH] python smart_home.py
 ```
+
+# RASPBERRY
+
+Tested on a Raspberry PI 4 Model B
