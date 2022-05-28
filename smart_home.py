@@ -10,30 +10,57 @@ c = config.get_config()
 ligths_lan = lifxlan.LifxLAN(None)
 client = fliclib.FlicClient("localhost")
 MAX_POWER = 65535
+devices = {
+
+}
 
 def wrapped_toggle_lifx(action_id):
 	try:
-		device = ligths_lan.get_device_by_name(action_id)
-		current_power = device.get_power()
-		device.set_power(0 if current_power == MAX_POWER else MAX_POWER, rapid=True)
+		device = None
+		if action_id in devices:
+			device = devices[action_id]
+		else:
+			device = ligths_lan.get_device_by_name(action_id)
+		if device:
+			devices[action_id] = device
+			current_power = device.get_power()
+			device.set_power(0 if current_power == MAX_POWER else MAX_POWER, rapid=True)
+		else:
+			logger.warning(f"unknow device by name {action_id}")
 	except:
 		traceback.print_exc()
 
 def wrapped_down_lifx(action_id):
 	try:
-		device = ligths_lan.get_device_by_name(action_id)
-		current_brightness = device.get_color()[2]
-		logger.debug(current_brightness)
-		device.set_brightness(current_brightness - 12000 if current_brightness >= 12000 else 0, rapid=True)
+		device = None
+		if action_id in devices:
+			device = devices[action_id]
+		else:
+			device = ligths_lan.get_device_by_name(action_id)
+		if device:
+			devices[action_id] = device
+			current_brightness = device.get_color()[2]
+			logger.debug(current_brightness)
+			device.set_brightness(current_brightness - 12000 if current_brightness >= 12000 else 0, rapid=True)
+		else:
+			logger.warning(f"unknow device by name {action_id}")
 	except:
 		traceback.print_exc()
 
 def wrapped_up_lifx(action_id):
 	try:
-		device = ligths_lan.get_device_by_name(action_id)
-		current_brightness = device.get_color()[2]
-		logger.debug(current_brightness)
-		device.set_brightness(current_brightness + 12000 if current_brightness < (MAX_POWER - 12000) else MAX_POWER, rapid=True)
+		device = None
+		if action_id in devices:
+			device = devices[action_id]
+		else:
+			device = ligths_lan.get_device_by_name(action_id)
+		if device:
+			device = ligths_lan.get_device_by_name(action_id)
+			current_brightness = device.get_color()[2]
+			logger.debug(current_brightness)
+			device.set_brightness(current_brightness + 12000 if current_brightness < (MAX_POWER - 12000) else MAX_POWER, rapid=True)
+		else:
+			logger.warning(f"unknow device by name {action_id}")
 	except:
 		traceback.print_exc()
 
@@ -74,9 +101,9 @@ def got_info(items):
 
 
 
-devices = ligths_lan.get_lights()
+debug_devices = ligths_lan.get_lights()
 labels = []
-for device in devices:
+for device in debug_devices:
 	logger.debug(device)
 
 
