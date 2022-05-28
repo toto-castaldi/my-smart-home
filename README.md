@@ -1,6 +1,11 @@
 MY-SMART-HOME
 =============
 
+# Controlling LIFX with FLIC smart-buttons
+
+[![demo](lifx-flic.png)](https://youtube.com/shorts/Z6pzKkCa6y0?feature=share)
+
+
 With [Flic library](https://github.com/50ButtonsEach/fliclib-linux-hci)
 
 Start it
