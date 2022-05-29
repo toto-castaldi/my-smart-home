@@ -39,7 +39,8 @@ def wrap_lifx(callback, targets):
 			else:
 				logger.info(f"search for device {target}")
 				device = ligths_lan.get_device_by_name(target)
-				devices_cache[target] = device
+				if device:
+					devices_cache[target] = device
 
 			if device:
 				callback(device)
