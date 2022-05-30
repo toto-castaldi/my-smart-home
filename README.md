@@ -46,3 +46,14 @@ LOG_LEVEL=DEBUG CONFIG=[YOUR_CONFIG_PATH] python smart_home.py
 # RASPBERRY
 
 Tested on a Raspberry PI 4 Model B
+
+restarting deamons
+```bash
+kill -9 `ps -ef | grep -P "python smart_home.py" | head -n 1 | awk '{print $2}'`
+kill -9 `ps -ef | grep -P "flicd -f" | head -n 1 | awk '{print $2}'`
+```
+
+At 02:00.
+
+0 2 * * * kill -9 `ps -ef | grep -P "python smart_home.py" | head -n 1 | awk '{print $2}'`
+
