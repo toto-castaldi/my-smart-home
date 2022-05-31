@@ -90,6 +90,7 @@ def got_info(items):
 debug_devices = ligths_lan.get_lights()
 labels = []
 for device in debug_devices:
+	devices_cache[device.get_label()] = device
 	logger.debug(device)
 
 
