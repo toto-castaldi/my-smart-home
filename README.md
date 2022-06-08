@@ -6,14 +6,6 @@ MY-SMART-HOME
 [![demo](lifx-flic.png)](https://youtube.com/shorts/Z6pzKkCa6y0?feature=share)
 
 
-With [Flic library](https://github.com/50ButtonsEach/fliclib-linux-hci)
-
-Start it
-
-```bash
-nohup ./flicd-deamon.sh [FLIC_LIB_PATH]/flicd [FLIC_DB_PATH] &
-```
-
 # DOCKER
 
 ## FLICD
@@ -31,6 +23,14 @@ docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/lo
 ```
 
 # DEV
+
+With [Flic library](https://github.com/50ButtonsEach/fliclib-linux-hci)
+
+Start it
+
+```bash
+nohup ./flicd-deamon.sh [FLIC_LIB_PATH]/flicd [FLIC_DB_PATH] &
+```
 
 ## PYTHON
 
