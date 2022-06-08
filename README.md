@@ -14,6 +14,22 @@ Start it
 nohup ./flicd-deamon.sh [FLIC_LIB_PATH]/flicd [FLIC_DB_PATH] &
 ```
 
+# DOCKER
+
+## FLICD
+
+```
+docker build . -f ./Dockerfile-flicd -t flicd
+docker run -d --restart unless-stopped --network host --privileged -v [YOUR_FLICDB_PATH]:/config/flicd.db -v [YOUR_LOG_PATH]:/var/log/flicd.out flicd
+```
+
+## SMART_HOME
+
+```
+docker build . -f ./Dockerfile-smart_home -t smart_home
+docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/log/smart_home.out -v [YOUR_CONFIG]:/config/config.json smart_home
+```
+
 # DEV
 
 ## PYTHON

@@ -1,0 +1,14 @@
+FROM python:3.9.5
+
+WORKDIR /app
+
+COPY *.py /app/
+COPY requirements.txt /app/
+
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+ENV CONFIG=/config/config.json
+
+COPY smart_home-daemon.sh /app
+
+ENTRYPOINT ["/app/smart_home-daemon.sh"]

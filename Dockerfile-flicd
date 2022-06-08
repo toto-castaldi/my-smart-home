@@ -1,0 +1,20 @@
+FROM ubuntu:22.04
+
+WORKDIR /app
+
+#PACKAGES
+RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y --fix-missing
+RUN DEBIAN_FRONTEND="noninteractive" apt-get upgrade -y --fix-missing
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y wget unzip vim libcap2-bin
+RUN wget https://github.com/50ButtonsEach/fliclib-linux-hci/archive/refs/heads/master.zip
+RUN unzip master.zip
+
+ENV ARCH=x86_64
+
+COPY flicd-deamon.sh /app
+RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/aarch64/flicd
+RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/armv6l/flicd
+RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/x86_64/flicd
+RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/i386/flicd
+
+ENTRYPOINT [ "/app/flicd-deamon.sh", "/config/flicd.db"]
