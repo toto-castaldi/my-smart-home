@@ -1,8 +1,13 @@
 import string
 import requests
 import utils
+import lifxlan
 
 logger = utils.init_log()
+ligths_lan = lifxlan.LifxLAN(None)
+
+def all_off():
+    ligths_lan.set_power_all_lights("off", rapid=True)
 
 def list_lights(api_token:string):
     headers = {

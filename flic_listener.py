@@ -3,6 +3,7 @@ import lifx
 import utils
 import config
 import lifxlan
+import lifx
 import traceback
 
 logger = utils.init_log()
@@ -49,9 +50,6 @@ def wrap_lifx(callback, targets):
 	except:
 		traceback.print_exc()
 
-def all_off_lifx():
-	ligths_lan.set_power_all_lights("off", rapid=True)
-
 wrapped_actions = {
 	"toggle-lifx" : toggle_lifx,
 	"down-lifx" : down_lifx,
@@ -60,7 +58,7 @@ wrapped_actions = {
 }
 
 direct_actions = {
-	"all-off-lifx" : all_off_lifx
+	"all-off-lifx" : lifx.all_off
 }
 
 def on_button_single_or_double_click_or_hold(channel, click_type, was_queued, time_diff):

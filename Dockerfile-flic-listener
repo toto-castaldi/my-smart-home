@@ -9,6 +9,6 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 ENV CONFIG=/config/config.json
 
-COPY smart_home-daemon.sh /app
+COPY flic-listener-daemon.sh /app
 
-CMD ["/app/smart_home-daemon.sh"]
+CMD ["/app/flic-listener-daemon.sh"]

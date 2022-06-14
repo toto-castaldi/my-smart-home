@@ -74,6 +74,7 @@ fi
 
 ```bash
 . .venv/bin/activate
+pip install -r requirements.txt
 python scan_wizard.py
 ```
 
@@ -83,4 +84,11 @@ python scan_wizard.py
 . .venv/bin/activate
 pip install -r requirements.txt
 LOG_LEVEL=DEBUG CONFIG=[YOUR_CONFIG_PATH] python smart_home.py
+```
+## BATCH
+
+```bash
+. .venv/bin/activate
+pip install -r requirements.txt
+LOG_LEVEL=DEBUG python batch.py
 ```
