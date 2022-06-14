@@ -8,18 +8,11 @@ MY-SMART-HOME
 
 # DOCKER
 
-## FLICD
+On Raspberry 4 Model B
 
 ```
-docker build . -f ./Dockerfile-flicd -t flicd
-docker run -d --restart unless-stopped --network host --privileged -v [YOUR_FLICDB_PATH]:/config/flicd.db -v [YOUR_LOG_PATH]:/var/log/flicd.out flicd
-```
-
-## SMART_HOME
-
-```
-docker build . -f ./Dockerfile-smart_home -t smart_home
-docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/log/smart_home.out -v [YOUR_CONFIG]:/config/config.json smart_home
+docker run -d --restart unless-stopped --network host --privileged -e ARCH=aarch64 -v [YOUR_FLICDB_PATH]:/config/flicd.db -v [YOUR_LOG_PATH]:/var/log/flicd.out totocastaldi/my-smart-home-flicd:raspberry4b
+docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/log/smart_home.out -v [YOUR_CONFIG]:/config/config.json totocastaldi/my-smart-home-server:raspberry4b
 ```
 
 # DEV

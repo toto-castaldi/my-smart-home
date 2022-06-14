@@ -11,4 +11,4 @@ ENV CONFIG=/config/config.json
 
 COPY smart_home-daemon.sh /app
 
-ENTRYPOINT ["/app/smart_home-daemon.sh"]
+CMD ["/app/smart_home-daemon.sh"]
