@@ -45,14 +45,14 @@ def toggle(device_id:string):
 
     wrap_lifx(c, device_id)
 
-def down_lifx(device_id):
+def down(device_id):
     def c(device):
         current_brightness = device.get_color()[2]
         device.set_brightness(current_brightness - 12000 if current_brightness >= 12000 else 0, rapid=True)
 
     wrap_lifx(c, device_id)
 
-def up_lifx(device_id):
+def up(device_id):
     def c(device):
         current_brightness = device.get_color()[2]
         logger.debug(current_brightness)
@@ -60,7 +60,7 @@ def up_lifx(device_id):
     
     wrap_lifx(c, device_id)
 	
-def off_lifx(device_id):
+def off(device_id):
     def c(device):
         device.set_power(0, rapid=True)
 
