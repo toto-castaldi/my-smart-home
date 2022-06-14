@@ -11,10 +11,10 @@ RUN unzip master.zip
 
 ENV ARCH=aarch64
 
-COPY deamon-flicd.sh /app
+COPY daemon-flicd.sh /app
 RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/aarch64/flicd
 RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/armv6l/flicd
 RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/x86_64/flicd
 RUN setcap cap_net_admin=ep /app/fliclib-linux-hci-master/bin/i386/flicd
 
-CMD [ "/app/deamon-flicd.sh", "/config/flicd.db"]
+CMD [ "/app/daemon-flicd.sh", "/config/flicd.db"]

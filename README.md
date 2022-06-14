@@ -16,7 +16,7 @@ On Raspberry PI 4 Model B
 
 ```
 docker run -d --restart unless-stopped --network host --privileged -v [YOUR_FLICDB_PATH]:/config/flicd.db -v [YOUR_LOG_PATH]:/var/log/log.out totocastaldi/my-smart-home-flicd:raspberry4b
-docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/log/log.out -v [YOUR_CONFIG]:/config/config.json totocastaldi/my-smart-home-server:raspberry4b
+docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/log/log.out -v [YOUR_LISTENER_LOGIC]:/app/flic_listener.py totocastaldi/my-smart-home-flic-listener:raspberry4b
 docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/log/log.out -v [YOUR_BATCH_LOGIC]:/app/batch.py totocastaldi/my-smart-home-batch:raspberry4b
 ```
 
