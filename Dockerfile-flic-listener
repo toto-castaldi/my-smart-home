@@ -7,8 +7,6 @@ COPY requirements.txt /app/
 
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-ENV CONFIG=/config/config.json
-
 COPY daemon-flic-listener.sh /app
 
 CMD ["/app/daemon-flic-listener.sh"]
