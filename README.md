@@ -18,11 +18,12 @@ docker run -d --restart unless-stopped --network host -v [YOUR_LOG_PATH]:/var/lo
 # DEV
 
 With [Flic library](https://github.com/50ButtonsEach/fliclib-linux-hci)
+With [Lifxlan](https://github.com/mclarkk/lifxlan)
 
 Start it
 
 ```bash
-nohup ./flicd-deamon.sh [FLIC_LIB_PATH]/flicd [FLIC_DB_PATH] &
+[FLIC_LIB_PATH]/flicd -f [FLIC_DB_PATH]
 ```
 
 ## PYTHON

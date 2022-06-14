@@ -49,11 +49,18 @@ def wrap_lifx(callback, targets):
 	except:
 		traceback.print_exc()
 
-actions = {
+def all_off_lifx():
+	ligths_lan.set_power_all_lights("off", rapid=True)
+
+wrapped_actions = {
 	"toggle-lifx" : toggle_lifx,
 	"down-lifx" : down_lifx,
 	"up-lifx" : up_lifx,
 	"off-lifx" : off_lifx
+}
+
+direct_actions = {
+	"all-off-lifx" : all_off_lifx
 }
 
 def on_button_single_or_double_click_or_hold(channel, click_type, was_queued, time_diff):
@@ -65,7 +72,13 @@ def on_button_single_or_double_click_or_hold(channel, click_type, was_queued, ti
 		configured_action = config.search_action(button, c_type)
 		if configured_action is not None:
 			logger.info(configured_action)
-			wrap_lifx(actions[configured_action["action"]], configured_action["action_id"])
+			c_a_action = configured_action["action"]
+			if c_a_action in wrapped_actions:
+				wrap_lifx(wrapped_actions[c_a_action], configured_action["action_id"])
+			elif c_a_action in direct_actions:
+				direct_actions[c_a_action]()
+			else:
+				logger.warning(f"can't find {c_a_action} handler")		
 		else:
 			logger.warning(f"unknow {c_type} action on button {bd_addr}")	
 	else:
