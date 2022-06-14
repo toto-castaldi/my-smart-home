@@ -12,7 +12,7 @@ MY-SMART-HOME
 
 # DOCKER
 
-On Raspberry PI 4 Model B
+Tested on RaspberryPI 4 Model B
 
 ```
 docker run -d --restart unless-stopped --network host --privileged -v [YOUR_FLICDB_PATH]:/config/flicd.db -v [YOUR_LOG_PATH]:/var/log/log.out totocastaldi/my-smart-home-flicd:raspberry4b
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
 ```
 
-config.json example
+flic_listener.py example
 
 ```python
 import lifx
