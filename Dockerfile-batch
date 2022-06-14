@@ -7,6 +7,6 @@ COPY requirements.txt /app/
 
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-COPY batch-daemon.sh /app
+COPY deamon-batch.sh /app
 
-CMD ["/app/batch-daemon.sh"]
+CMD ["/app/deamon-batch.sh"]

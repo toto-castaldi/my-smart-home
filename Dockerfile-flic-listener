@@ -9,6 +9,6 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 ENV CONFIG=/config/config.json
 
-COPY flic-listener-daemon.sh /app
+COPY deamon-flic-listener.sh /app
 
-CMD ["/app/flic-listener-daemon.sh"]
+CMD ["/app/deamon-flic-listener.sh"]
