@@ -4,6 +4,7 @@ import utils
 import lifxlan
 
 logger = utils.init_log()
+
 ligths_lan = lifxlan.LifxLAN(None)
 MAX_POWER = 65535
 devices_cache = {
@@ -12,7 +13,7 @@ devices_cache = {
 
 debug_devices = ligths_lan.get_lights()
 for device in debug_devices:
-	devices_cache[device.get_label()] = device
+	devices_cache[device.label] = device
 	logger.debug(device)
 
 
