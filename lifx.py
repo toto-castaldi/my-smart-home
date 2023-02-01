@@ -18,12 +18,14 @@ devices_cache = {
 debug_devices = ligths_lan.get_lights()
 
 def update_devices_cache():
+    print("update devices")
     try:
         for device in debug_devices:
             if device.label is None:
                 device.get_label()
 
-            
+            print(f"update {device.label}")
+
             if (device.label not in devices_cache.keys()):
                 devices_cache[device.label] = None
 
