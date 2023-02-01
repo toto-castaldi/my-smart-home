@@ -2,6 +2,10 @@ import string
 import requests
 import utils
 import lifxlan
+import threading
+import time
+
+
 
 logger = utils.init_log()
 
@@ -12,9 +16,31 @@ devices_cache = {
 }
 
 debug_devices = ligths_lan.get_lights()
-for device in debug_devices:
-	devices_cache[device.label] = device
-	logger.debug(device)
+
+def update_devices_cache():
+    try:
+        for device in debug_devices:
+            if device.label is None:
+                device.get_label()
+
+            
+            if (device.label not in devices_cache.keys()):
+                devices_cache[device.label] = None
+
+            if (device.label in devices_cache.keys() and devices_cache[device.label] is None):
+                try:
+                    devices_cache[device.label] = device
+                    logger.debug(device)
+                except:
+                    traceback.print_exc()
+    except:
+        traceback.print_exc()
+
+    time.sleep(120)
+
+
+updating_devices = threading.Thread(target=update_devices_cache)
+updating_devices.start()
 
 
 def wrap_lifx(callback, targets):
