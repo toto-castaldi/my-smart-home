@@ -18,27 +18,28 @@ devices_cache = {
 debug_devices = ligths_lan.get_lights()
 
 def update_devices_cache():
-    print("update devices")
-    try:
-        for device in debug_devices:
-            if device.label is None:
-                device.get_label()
+    while True:
+        print("update devices")
+        try:
+            for device in debug_devices:
+                if device.label is None:
+                    device.get_label()
 
-            print(f"update {device.label}")
+                print(f"update {device.label}")
 
-            if (device.label not in devices_cache.keys()):
-                devices_cache[device.label] = None
+                if (device.label not in devices_cache.keys()):
+                    devices_cache[device.label] = None
 
-            if (device.label in devices_cache.keys() and devices_cache[device.label] is None):
-                try:
-                    devices_cache[device.label] = device
-                    logger.debug(device)
-                except:
-                    traceback.print_exc()
-    except:
-        traceback.print_exc()
+                if (device.label in devices_cache.keys() and devices_cache[device.label] is None):
+                    try:
+                        devices_cache[device.label] = device
+                        logger.debug(device)
+                    except:
+                        traceback.print_exc()
+        except:
+            traceback.print_exc()
 
-    time.sleep(120)
+        time.sleep(120)
 
 
 updating_devices = threading.Thread(target=update_devices_cache)
